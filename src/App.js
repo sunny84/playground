@@ -1,26 +1,23 @@
-//import logo from './logo.svg';
-import './App.css';
-import Fresh from "./Fresh";
-import TopBanner from "./TopBanner";
-import { Component } from 'react';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-const topBannerLink = "http://localhost:3001/";
-const topBannerImage = "/images/banner_top.jpg";
+import './App.css';
+
+import Main from './container/Main';
+import Viewer from './container/Viewer';
+import FreshHome from './container/FreshHome';
 
 class App extends Component {
   render() {
     return (
-      <div id="layout_body">
-        <div id="layout_header">
-          <div className="TopBanner">
-            <TopBanner link={topBannerLink} image={topBannerImage} />
-          </div>
-          <div className="HeaderArea">
-            
-          </div>
+      <Router>
+        <div>
+          <Route exact path="/" component={Main} />
+          <Route path="/fresh/:freshId" component={FreshHome} />
+          <Route path="/viewer/:visitorId" component={Viewer} />
         </div>
-      </div>
-    );
+      </Router>
+    )
   }
 }
 
