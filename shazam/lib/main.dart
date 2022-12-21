@@ -39,18 +39,6 @@ class _HomePageState extends State<HomePage> {
         });
 
         return Scaffold(
-          appBar: AppBar(
-            leading:
-                IconButton(onPressed: () {}, icon: Icon(Icons.person_outline)),
-            actions: [
-              IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.trending_up,
-                ),
-              ),
-            ],
-          ),
           body: Stack(
             children: [
               TabBarView(
@@ -140,7 +128,79 @@ class SecondTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('두번째 페이지'));
+    return Container(
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              colors: [Colors.blue.withOpacity(0.6), Colors.blue],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter)),
+      child: Column(
+        children: [
+          SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+          Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            TextButton(
+              onPressed: () {},
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.white,
+              ),
+              child: Column(children: [Icon(Icons.person), Text('라이브러리')]),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.04,
+              width: MediaQuery.of(context).size.width * 0.63,
+            ),
+            TextButton(
+              onPressed: () {},
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.white,
+              ),
+              child: Column(children: [Icon(Icons.trending_up), Text('차트')]),
+            ),
+          ]),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.06),
+          Text(
+            "Shazam하려면 탭하세요",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.06),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(125),
+            child: Container(
+              width: 250,
+              height: 250,
+              padding: EdgeInsets.all(40.0),
+              color: Colors.white.withOpacity(0.4),
+              child: Image.network(
+                "https://i.ibb.co/hxNbZ8p/shazam.png",
+                color: Colors.white,
+                width: 130,
+                height: 130,
+              ),
+            ),
+          ),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.06),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(125),
+            child: Container(
+              width: 40,
+              height: 40,
+              color: Colors.white.withOpacity(0.4),
+              child: TextButton(
+                onPressed: () {},
+                style: TextButton.styleFrom(
+                  foregroundColor: Colors.white,
+                ),
+                child: Icon(Icons.search),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
 
