@@ -69,6 +69,14 @@ class _HomePageState extends State<HomePage> {
                       ),
                       onTap: () {
                         // 아이템 클릭시
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => DetailPage(
+                              index: index,
+                            ),
+                          ),
+                        );
                       },
                     );
                   },
@@ -77,6 +85,15 @@ class _HomePageState extends State<HomePage> {
             child: Icon(Icons.add),
             onPressed: () {
               // + 버튼 클릭시 메모 생성 및 수정 페이지로 이동
+              memoService.createMemo(content: '');
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => DetailPage(
+                    index: memoService.memoList.length - 1,
+                  ),
+                ),
+              );
             },
           ),
         );
@@ -87,16 +104,18 @@ class _HomePageState extends State<HomePage> {
 
 // 메모 생성 및 수정 페이지
 class DetailPage extends StatelessWidget {
-  DetailPage({super.key, required this.memoList, required this.index});
+  DetailPage({super.key, required this.index});
 
-  final List<String> memoList;
   final int index;
 
   TextEditingController contentController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    contentController.text = memoList[index];
+    MemoService memoService = context.read<MemoService>();
+    Memo memo = memoService.memoList[index];
+
+    contentController.text = memo.content;
 
     return Scaffold(
       appBar: AppBar(
@@ -120,7 +139,7 @@ class DetailPage extends StatelessWidget {
                       // 확인 버튼
                       TextButton(
                         onPressed: () {
-                          memoList.removeAt(index); // index에 해당하는 항목 삭제
+                          memoService.deleteMemo(index: index);
                           Navigator.pop(context); // 팝업 닫기
                           Navigator.pop(context); // HomePage 로 가기
                         },
@@ -152,7 +171,7 @@ class DetailPage extends StatelessWidget {
           keyboardType: TextInputType.multiline,
           onChanged: (value) {
             // 텍스트필드 안의 값이 변할 때
-            memoList[index] = value;
+            memoService.updateMemo(index: index, content: value);
           },
         ),
       ),
