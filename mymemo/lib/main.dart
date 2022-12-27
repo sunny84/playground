@@ -36,8 +36,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<String> memoList = ['장보기 목록: 사과, 양파', '새 메모']; // 전체 메모 목록
-
   @override
   Widget build(BuildContext context) {
     return Consumer<MemoService>(
